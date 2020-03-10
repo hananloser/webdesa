@@ -44,6 +44,24 @@ class LayananController extends Controller
     public function store(Request $request)
     {
         
+        $pesan = [
+            'required' => 'Error :attribute isi field terlebih dahulu',
+            'min' => 'Error jumlah characters harus lebih dari 10'
+        ];
+
+        $validasi = [
+            'layanan' => ['required', 'string' , 'max:200' , 'min:10']
+        ];
+
+        $_validLayanan = $request->validate($validasi,$pesan);
+
+        if($_validLayanan) {
+            Layanan::create([
+                'layanan' => $request->layanan
+            ]);
+        }
+
+        return view('layanan.index')->with('status' , 'Data Berhasil Di Tambah Kan');
 
     }
 

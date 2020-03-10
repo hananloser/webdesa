@@ -28,36 +28,7 @@
         <!-- Page content -->
         <div class="container-fluid mt--6">
             <div class="row">
-                <div class="col-xl-8">
-                    <div class="card">
-                        <div class="card-header">
-                            {{__('Row 1 1')}}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4">
-                    <div class="card">
-                        <div class="card-header">
-                            {{__('Row 1 2')}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xl-8">
-                    <div class="card">
-                        <div class="card-header">
-                            {{__('Row 2 1')}}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4">
-                <div class="card">
-                        <div class="card-header">
-                            {{__('Row 2 1')}}
-                        </div>
-                    </div>
-                </div>
+                @yield('content')
             </div>
             <!-- Footer -->
             @include('components._footer')
@@ -75,5 +46,6 @@
 <script src="{{'assets/vendor/chart.js/dist/Chart.extension.js'}}"></script>
 <!-- Argon JS -->
 <script src="{{asset('assets/js/argon.js?v=1.2.0')}}"></script>
+@yield('script')
 
 </html>

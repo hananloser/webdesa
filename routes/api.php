@@ -18,7 +18,12 @@ use App\Layanan ;
 
 
 Route::get('layanan', function () {
-    $layanan = Layanan::with(['syrats'])->get() ; 
+    $layanan = Layanan::with(['syrats'])->whereHas('syrats')->get();
+    return $layanan;
+});
+
+Route::get('layanan/empty', function () {
+    $layanan = Layanan::with(['syrats'])->whereDoesntHave('syrats')->get();
     return $layanan;
 });
 

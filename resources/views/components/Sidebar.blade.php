@@ -3,7 +3,7 @@
         <!-- Brand -->
         <div class="sidenav-header  align-items-center">
             <a class="navbar-brand" href="javascript:void(0)">
-                <img src="../assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
+                <!-- <img src="../assets/img/brand/blue.png" class="navbar-brand-img" alt="..."> -->
             </a>
         </div>
         <div class="navbar-inner">
@@ -12,13 +12,14 @@
                 <!-- Nav items -->
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="dashboard.html">
+                        <a class="nav-link active" href="{{url('/admin/home')}}">
                             <i class="ni ni-tv-2 text-primary"></i>
                             <span class="nav-link-text">Dashboard</span>
                         </a>
                     </li>
+                    @can('isAdmin')
                     <li class="nav-item">
-                        <a class="nav-link" href="icons.html">
+                        <a class="nav-link" href="{{url('admin/layanan')}}">
                             <i class="ni ni-planet text-orange"></i>
                             <span class="nav-link-text">{{__('Layanan')}}</span>
                         </a>
@@ -41,12 +42,7 @@
                             <span class="nav-link-text">{{__('Aparat Desa')}}</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login.html">
-                            <i class="ni ni-key-25 text-info"></i>
-                            <span class="nav-link-text">{{__('Register Admin')}}</span>
-                        </a>
-                    </li>
+                    @endcan
                     <li class="nav-item">
                         <a class="nav-link" href="register.html">
                             <i class="ni ni-circle-08 text-pink"></i>
