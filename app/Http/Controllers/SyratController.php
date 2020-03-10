@@ -14,7 +14,13 @@ class SyratController extends Controller
      */
     public function index()
     {
-        //
+        // $syrat = Syrat::orderBy('created_at' , 'DESC')
+        //             ->with('layanan')
+        //             ->paginate(10);
+        // return $syrat ; 
+
+        return view('syrat.index') ;
+
     }
 
     /**
@@ -24,7 +30,7 @@ class SyratController extends Controller
      */
     public function create()
     {
-        //
+        return view('syrat.create');
     }
 
     /**

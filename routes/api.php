@@ -1,6 +1,4 @@
 <?php
-
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Layanan ;
 /*
@@ -20,9 +18,9 @@ use App\Layanan ;
 
 
 Route::get('layanan', function () {
-
     $layanan = Layanan::with(['syrats'])->get() ; 
     return $layanan;
-
-
 });
+
+
+Route::get('syrat' , 'SyratController@index');

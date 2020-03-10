@@ -1908,6 +1908,8 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -1922,7 +1924,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "App",
   data: function data() {
@@ -1932,6 +1934,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     console.log('hai hanan');
+    this.load();
+  },
+  methods: {
+    load: function load() {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/layanan').then(function (res) {
+        console.log(res.data);
+      });
+    }
   }
 });
 
@@ -37319,7 +37329,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "col-md-8" }, [
           _c("div", { staticClass: "card" }, [
             _c("div", { staticClass: "card-header" }, [
-              _vm._v("Selamat Datang Hanan \n            \n        ")
+              _vm._v("Selamat Datang Hanan \n        ")
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [

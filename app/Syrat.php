@@ -8,8 +8,7 @@ class Syrat extends Model
 {
     protected $guarded = [];
 
-
     public function layanan() {
-        
+        return $this->belongsTo(Layanan::class);
     }
 }
