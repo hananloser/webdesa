@@ -10,22 +10,18 @@
 
     <title>Web Desa</title>
 
+    <link href="{{ asset('assets/argon.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- Core -->
-    <script src="{{asset('assets/vendor/jquery/dist/jquery.min.js')}}"></script>
     <script src="{{asset('assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
-
+    
     <!-- Argon JS -->
     <script src="{{asset('assets/js/argon.min.js')}}"></script>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
+    
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/argon.min.css') }}" rel="stylesheet">
+    <script src="{{asset('assets/vendor/jquery/dist/jquery.min.js')}}"></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 
 <body>
@@ -52,11 +48,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
-                        <!-- @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
-                        @endif -->
                         @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

@@ -4,105 +4,69 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>Web Desa</title>
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-
     <!-- Icons -->
     <link href="{{asset('assets/vendor/nucleo/css/nucleo.css')}}" rel="stylesheet">
     <link href="{{asset('assets/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
-
     <!-- Argon CSS -->
     <link type="text/css" href="{{asset('assets/css/argon.min.css')}}" rel="stylesheet">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
     <!-- Core -->
     <script src="{{asset('assets/vendor/jquery/dist/jquery.min.js')}}"></script>
     <script src="{{asset('assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
-
     <!-- Argon JS -->
     <script src="{{asset('assets/js/argon.min.js')}}"></script>
-
-    <!-- Styles -->
-    <style>
-        html,
-        body {
-            background-color: #fff;
-            color: #636b6f;
-            font-family: 'Nunito', sans-serif;
-            font-weight: 200;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .full-height {
-            height: 100vh;
-        }
-
-        .flex-center {
-            align-items: center;
-            display: flex;
-            justify-content: center;
-        }
-
-        .position-ref {
-            position: relative;
-        }
-
-        .top-right {
-            position: absolute;
-            right: 10px;
-            top: 18px;
-        }
-
-        .content {
-            text-align: center;
-        }
-
-        .title {
-            font-size: 84px;
-        }
-
-        .links>a {
-            color: #636b6f;
-            padding: 0 25px;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: .1rem;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-
-        .m-b-md {
-            margin-bottom: 30px;
-        }
-    </style>
 </head>
 
 <body>
-    <div class="flex-center position-ref full-height">
-        @if (Route::has('login'))
-        <div class="top-right links">
-            @auth
-            <a href="{{ url('/admin/home') }}">Home</a>
-            @else
-            <a href="{{ route('login') }}">Login</a>
+    <nav class="navbar navbar-horizontal navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{{url('/')}}">Bangun Jaya</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar-default">
+                <div class="navbar-collapse-header">
+                    <div class="row">
+                        <div class="col-6 collapse-brand">
+                            <a href="../../">
+                                <img src="../../assets/img/brand/blue.png">
+                            </a>
+                        </div>
+                        <div class="col-6 collapse-close">
+                            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
+                                <span></span>
+                                <span></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
-            <!-- @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif -->
-            @endauth
-        </div>
-        @endif
+                <ul class="navbar-nav ml-lg-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link nav-link-icon" href="#" id="navbar-default_dropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="ni ni-settings-gear-65"></i>
+                            <span class="nav-link-inner--text d-lg-none">Settings</span>
+                        </a>
+                        @if(Route::has('login'))
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-default_dropdown_1">
+                            <div class="dropdown-divider"></div>
+                            @auth
+                            <a class="dropdown-item" href="{{url('admin/home')}}">Home</a>
+                            @else
+                            <a class="dropdown-item" href="{{url('admin/home')}}">Login</a>
+                            @endauth
+                            @endif
+                        </div>
+                    </li>
+                </ul>
 
-        <div class="content">
-            <div class="title m-b-md">
-                Bangun Jaya Portal
             </div>
         </div>
-    </div>
+    </nav>
 </body>
 
 </html>
