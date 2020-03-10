@@ -2,18 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Layanan;
+use App\Syrat;
 use Illuminate\Http\Request;
 
-class LayananController extends Controller
+class SyratController extends Controller
 {
-    /**
-     * Construct Ketika Route Di panggil 
-     */
-    public function __construct(){
-        $this->middleware('auth');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -21,8 +14,7 @@ class LayananController extends Controller
      */
     public function index()
     {
-        $layanan = Layanan::all() ;
-        return view('layanan.index', compact('layanan'));
+        //
     }
 
     /**
@@ -43,17 +35,16 @@ class LayananController extends Controller
      */
     public function store(Request $request)
     {
-        
-
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Layanan  $layanan
+     * @param  \App\Syrat  $syrat
      * @return \Illuminate\Http\Response
      */
-    public function show(Layanan $layanan)
+    public function show(Syrat $syrat)
     {
         //
     }
@@ -61,10 +52,10 @@ class LayananController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Layanan  $layanan
+     * @param  \App\Syrat  $syrat
      * @return \Illuminate\Http\Response
      */
-    public function edit(Layanan $layanan)
+    public function edit(Syrat $syrat)
     {
         //
     }
@@ -73,10 +64,10 @@ class LayananController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Layanan  $layanan
+     * @param  \App\Syrat  $syrat
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Layanan $layanan)
+    public function update(Request $request, Syrat $syrat)
     {
         //
     }
@@ -84,10 +75,10 @@ class LayananController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Layanan  $layanan
+     * @param  \App\Syrat  $syrat
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Layanan $layanan)
+    public function destroy(Syrat $syrat)
     {
         //
     }

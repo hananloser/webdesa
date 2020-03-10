@@ -24,4 +24,5 @@ Auth::routes();
 Route::group(['prefix' => 'admin'], function (Router $router) {
     $router->get('/home', 'HomeController@index')->name('home');
     $router->get('/layanan', 'LayananController@index')->name('layanan');
+    $router->post('/layanan', 'LayananController@store')->name('layanan.store');
 });

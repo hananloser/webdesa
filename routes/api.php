@@ -1,9 +1,8 @@
 <?php
 
-use App\Layanan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\User ;
+use App\Layanan ;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -20,9 +19,10 @@ use App\User ;
 // });
 
 
-Route::get('layanan' , function (Request $request){
+Route::get('layanan', function () {
 
-    $layanan = Layanan::paginate(4); 
-    return $layanan ;
+    $layanan = Layanan::with(['syrats'])->get() ; 
+    return $layanan;
+
 
 });
