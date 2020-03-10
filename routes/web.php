@@ -18,9 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
 Auth::routes();
-
 Route::group(['prefix' => 'admin'], function (Router $router) {
     $router->get('/home', 'HomeController@index')->name('home');
     $router->get('/layanan', 'LayananController@index')->name('layanan');
