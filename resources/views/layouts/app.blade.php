@@ -19,7 +19,7 @@
 
 <body>
     @include('components.sidebar')
-
+    
     <div class="main-content" id="panel">
         <!-- Topnav -->
         @include('components.topnav')
