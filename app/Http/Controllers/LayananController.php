@@ -10,7 +10,8 @@ class LayananController extends Controller
     /**
      * Construct Ketika Route Di panggil 
      */
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('auth');
     }
 
@@ -21,8 +22,8 @@ class LayananController extends Controller
      */
     public function index()
     {
-        $layanan = Layanan::all() ;
-        return view('layanan.index', compact('layanan'));
+        $layanans = Layanan::latest()->paginate(5);
+        return view('layanan.index', compact('layanans'));
     }
 
     /**
@@ -43,26 +44,21 @@ class LayananController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $pesan = [
             'required' => 'Error :attribute isi field terlebih dahulu',
             'min' => 'Error jumlah characters harus lebih dari 10'
         ];
 
         $validasi = [
-            'layanan' => ['required', 'string' , 'max:200' , 'min:10']
+            'layanan' => ['required', 'string', 'max:200', 'min:10']
         ];
 
-        $_validLayanan = $request->validate($validasi,$pesan);
+        $_validLayanan = $request->validate($validasi, $pesan);
 
-        if($_validLayanan) {
-            Layanan::create([
-                'layanan' => $request->layanan
-            ]);
-        }
+        Layanan::create($request->all());
 
-        return view('layanan.index')->with('status' , 'Data Berhasil Di Tambah Kan');
-
+        return redirect()->route('layanan')->with('status', 'Data Berhasil Di Tambah Kan');
     }
 
     /**
@@ -82,9 +78,10 @@ class LayananController extends Controller
      * @param  \App\Layanan  $layanan
      * @return \Illuminate\Http\Response
      */
-    public function edit(Layanan $layanan)
+    public function edit(Layanan $layanans, $id)
     {
-        //
+        $layanan = $layanans->findOrFail($id);
+        return view('layanan.edit', compact('layanan'));
     }
 
     /**
@@ -94,9 +91,20 @@ class LayananController extends Controller
      * @param  \App\Layanan  $layanan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Layanan $layanan)
+    public function update(Request $request, Layanan $layanan, $id)
     {
-        //
+        $pesan = [
+            'required' => 'Error :attribute isi field terlebih dahulu',
+            'min' => 'Error jumlah characters harus lebih dari 10'
+        ];
+        $validasi = [
+            'layanan' => ['required', 'string', 'max:200', 'min:10']
+        ];
+        $request->validate($validasi, $pesan);
+        $layanan->find($id)
+                ->update($request->all());
+
+        return redirect()->route('layanan')->with('status', 'data berhasil di update');
     }
 
     /**

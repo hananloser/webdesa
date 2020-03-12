@@ -8,7 +8,8 @@
 
         </div>
         <div class="card-body">
-            @if(!empty($status))
+            {{$status ?? ''}}
+            @if($status = Session::get('status'))
             <div class="alert alert-info alert-with-icon">
                 <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
                     <i class="tim-icons icon-simple-remove"></i>
@@ -25,8 +26,25 @@
                 </thead>
                 <tbody>
                    
+                    @foreach($layanans as $key => $item)
+                    <tr>
+                        <td>{{$key+1}}</td>
+                        <td>{{$item->layanan}}</td>
+                        <td>
+                            <a href="{{route('layanan.edit' , $item->id)}}" class="btn btn-sm btn-primary">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a href="" class="btn btn-sm btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    @endforeach
                 </tbody>
             </table>
+            <div class="justify-content-center">
+                {{$layanans->links()}}
+            </div>
         </div>
     </div>
 </div>

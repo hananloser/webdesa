@@ -6,17 +6,19 @@
             <span class="text-white text-bold">{{__('Layanan')}}</span>
         </div>
         <div class="card-body">
-            <form action="{{route('layanan')}}" method="post">
+
+            <form action="{{route('layanan.update' , $layanan->id)}}" method="POST">
                 @csrf
+                @method('PUT')
                 <div class="form-group">
-                    <input type="text" class="form-control @error('layanan') is-invalid @enderror" name="layanan" placeholder="Tambah Layanan" value="{{old('layanan')}}" autocomplete="false">
+                    <input type="text" class="form-control @error('layanan') is-invalid @enderror" name="layanan"  value="{{$layanan->layanan}}" autocomplete="false">
                     @error('layanan')
                     <small class="invalid-feedback">{{$message}}</small>
                     @enderror
                 </div>
                 <button type="submit" class="btn btn-success">
                     <i class="fa fa-save"></i>
-                    Simpan
+                    update
                 </button>
             </form>
         </div>

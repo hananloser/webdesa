@@ -12,14 +12,14 @@
                 <!-- Nav items -->
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{url('/admin/home')}}">
+                        <a class="nav-link {{(request()->is('admin/home')) ? 'active' : ''  }}" href="{{url('/admin/home')}}">
                             <i class="ni ni-tv-2 text-primary"></i>
                             <span class="nav-link-text">Dashboard</span>
                         </a>
                     </li>
                     @can('isAdmin')
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url('admin/layanan')}}">
+                        <a class="nav-link {{(request()->is('admin/layanan')) ? 'active' : ''}}" href="{{url('admin/layanan')}}">
                             <i class="ni ni-planet text-orange"></i>
                             <span class="nav-link-text">{{__('Layanan')}}</span>
                         </a>
