@@ -43,7 +43,6 @@ class SyratController extends Controller
 
         $layanan = Layanan::find($id);
         $data = $request->syrat ;
-        $syarats;
         // dd($request->syrat);
         foreach ($data as $key => $value) {
             $syarats[] = [
