@@ -1,6 +1,8 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
-use App\Layanan ;
+use App\Layanan;
+use App\Syrat;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -28,4 +30,9 @@ Route::get('layanan/empty', function () {
 });
 
 
-Route::get('syrat' , 'SyratController@index');
+Route::get('syrat', function () {
+    $syrat = Syrat::orderBy('created_at', 'DESC')
+        ->with('layanan')
+        ->get();
+    return $syrat;
+});

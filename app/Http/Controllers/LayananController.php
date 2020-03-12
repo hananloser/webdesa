@@ -32,7 +32,7 @@ class LayananController extends Controller
      */
     public function create()
     {
-        //
+        return view('layanan.create');
     }
 
     /**

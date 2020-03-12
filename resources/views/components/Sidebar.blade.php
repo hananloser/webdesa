@@ -42,6 +42,12 @@
                             <span class="nav-link-text">{{__('Aparat Desa')}}</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.html">
+                            <i class="fa fa-chart-area text-pink"></i>
+                            <span class="nav-link-text">{{__('statistik')}}</span>
+                        </a>
+                    </li>
                     @endcan
                     <li class="nav-item">
                         <a class="nav-link" href="register.html">
@@ -49,7 +55,6 @@
                             <span class="nav-link-text">{{__('Log out')}}</span>
                         </a>
                     </li>
-                    
                 </ul>
                 <!-- Divider -->
                 <hr class="my-3">
