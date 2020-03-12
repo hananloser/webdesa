@@ -7,7 +7,8 @@
 * [x] disable register for admin back-end
 * [x] new login
 * [x] new Register form
-* [ ] add crud layanan with relation
+* [x] Layanan Crud done
+* [x] add crud layanan with relation
 * [ ] add crud with image bumdes
 * [ ] add crud with image pengaduan
 * [ ] add crud with image statis penduduk bangun jaya

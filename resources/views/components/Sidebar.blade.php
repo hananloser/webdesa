@@ -31,7 +31,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="profile.html">
+                    <a class="nav-link {{(request()->is('admin/pengaduan')) ? 'active' : ''}}" href="{{route('pengaduan.index')}}">
                             <i class="ni ni-single-02 text-yellow"></i>
                             <span class="nav-link-text">{{__('Pengaduan')}}</span>
                         </a>

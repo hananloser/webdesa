@@ -29,11 +29,10 @@ Route::group(['prefix' => 'admin'], function (Router $router) {
     $router->delete('/layanan/{edit}', 'LayananController@destroy')->name('layanan.delete');
     $router->post('/layanan', 'LayananController@store')->name('layanan.store');
 
-    Route::group(['prefix' => 'syarat'], function (Router $router) {
-        $router->get('/', 'SyratController@index')->name('syrat.index');
-        $router->get('/create', 'SyratController@create')->name('syrat.create');
-        $router->post('/create/{layanan_id}', 'SyratController@store')->name('syrat.store');
+    Route::group(['prefix' => 'pengaduan'], function (Router $router) {
+        $router->get('/' , 'PengaduanController@index')->name('pengaduan.index');
     });
+
 
 });
 
