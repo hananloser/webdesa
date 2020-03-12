@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Layanan;
 use App\Syrat;
 use Illuminate\Http\Request;
 
@@ -14,10 +15,11 @@ class SyratController extends Controller
      */
     public function index()
     {
-        $syrat = Syrat::orderBy('created_at' , 'DESC')
-                    ->with('layanan')
-                    ->paginate(10);
-        return $syrat ; 
+
+        $syrats = Layanan::orderBy('created_at', 'DESC')
+            ->with('syrats')
+            ->get();
+        return view('syrat.index', compact('syrats'));
     }
 
     /**
@@ -36,9 +38,25 @@ class SyratController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request , $id)
     {
-        //
+
+        $layanan = Layanan::find($id);
+        $data = $request->syrat ;
+        $syarats;
+        // dd($request->syrat);
+        foreach ($data as $key => $value) {
+            $syarats[] = [
+                'syrat' => $value
+            ];
+        }
+
+        $layanan->syrats()->createMany($syarats);
+        $layanan->save();
+
+        return redirect()->route('layanan')->with('status' , 'Syrat Berhasil Di Tambah Kan');
+
+
     }
 
     /**

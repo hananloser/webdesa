@@ -24,8 +24,20 @@ Route::group(['prefix' => 'admin'], function (Router $router) {
     $router->get('/layanan', 'LayananController@index')->name('layanan');
     $router->get('/layanan/create', 'LayananController@create')->name('layanan.create');
     $router->get('/layanan/{edit}/edit', 'LayananController@edit')->name('layanan.edit');
+    $router->get('/layanan/{edit}/show', 'LayananController@show')->name('layanan.show');
     $router->put('/layanan/{edit}', 'LayananController@update')->name('layanan.update');
     $router->delete('/layanan/{edit}', 'LayananController@destroy')->name('layanan.delete');
     $router->post('/layanan', 'LayananController@store')->name('layanan.store');
-    $router->get('/syrat' , 'SyratController@index');
+
+    Route::group(['prefix' => 'syarat'], function (Router $router) {
+        $router->get('/', 'SyratController@index')->name('syrat.index');
+        $router->get('/create', 'SyratController@create')->name('syrat.create');
+        $router->post('/create/{layanan_id}', 'SyratController@store')->name('syrat.store');
+    });
+
+});
+
+
+Route::group(['prefix' => 'landing'], function (Router $router) {
+    $router->get('/aparat' , 'LandingController@aparat')->name('landing.aparat');
 });

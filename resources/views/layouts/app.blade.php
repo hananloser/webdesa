@@ -19,7 +19,7 @@
 
 <body>
     @include('components.sidebar')
-    
+
     <div class="main-content" id="panel">
         <!-- Topnav -->
         @include('components.topnav')
@@ -46,6 +46,6 @@
 <script src="{{'assets/vendor/chart.js/dist/Chart.extension.js'}}"></script>
 <!-- Argon JS -->
 <script src="{{asset('assets/js/argon.js?v=1.2.0')}}"></script>
-@yield('script')
+@yield('scripts')
 
 </html>

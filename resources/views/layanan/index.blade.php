@@ -31,13 +31,24 @@
                         <td>{{$key+1}}</td>
                         <td>{{$item->layanan}}</td>
                         <td>
-                            <a href="{{route('layanan.edit' , $item->id)}}" class="btn btn-sm btn-primary floating float-left">
+                            <a href="#" data-toggle="tooltip" data-placement="top" title="jumlah syrat di dalam layanan"
+                                class="btn btn-sm btn-warning  floating float-left">
+                                {{ count($item->syrats) }}
+                            </a>
+                            <a href="{{route('layanan.edit' , $item->id)}}" data-toggle="tooltip" data-placement="top"
+                                title="Edit layanan " class="btn btn-sm btn-primary floating float-left">
                                 <i class="fa fa-edit"></i>
+                            </a>
+                            <a href="{{route('layanan.show' , $item->id)}}" data-toggle="tooltip" data-placement="top"
+                                title="Tampilkan syarat " class="btn btn-sm btn-info floating float-left">
+                                <i class="fa fa-eye"></i>
                             </a>
                             <form action="{{route('layanan.delete' , $item->id)}}" method="post">
                                 @csrf
                                 @method('delete')
-                                <button type="submit" class="btn btn-sm btn-danger floating">
+                                <button type="submit" class="btn btn-sm btn-danger floating" data-toggle="tooltip"
+                                    data-placement="top" title="Hapus ">
+
                                     <i class="fa fa-trash"></i>
                                 </button>
                             </form>
@@ -46,9 +57,7 @@
                     @endforeach
                 </tbody>
             </table>
-            <div class="justify-content-center">
-                {{$layanans->links()}}
-            </div>
+            {{ $layanans->links()}}
         </div>
     </div>
 </div>

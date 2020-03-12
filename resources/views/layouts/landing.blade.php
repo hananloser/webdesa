@@ -7,8 +7,10 @@
     <title>{{__('Web Desa')}}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/1e1e5779b9.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{asset('assets/css/app.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/demo.css') }}">
+
+
     <link rel="stylesheet" href="{{asset('assets/vendor/nucleo/css/nucleo.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('assets/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}"
         type="text/css">

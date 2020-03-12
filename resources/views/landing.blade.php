@@ -1,7 +1,10 @@
 @extends('layouts.landing')
 
 @section('content')
-    <div class="container">
-        <h1 class="header">Hai</h1>
-    </div>
+    <section class="v-row-center">
+        <div class="section-body">
+            <h2 style="margin-bottom: 1rem;">Selamat Datang <span class="cl-theme">Desa Bangun Jaya</span></h2>
+            <p></p>
+        </div>
+    </section>
 @endsection

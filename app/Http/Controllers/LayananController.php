@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class LayananController extends Controller
 {
     /**
-     * Construct Ketika Route Di panggil 
+     * Construct Ketika Route Di panggil
      */
     public function __construct()
     {
@@ -44,18 +44,14 @@ class LayananController extends Controller
      */
     public function store(Request $request)
     {
-
         $pesan = [
             'required' => 'Error :attribute isi field terlebih dahulu',
             'min' => 'Error jumlah characters harus lebih dari 10'
         ];
-
         $validasi = [
             'layanan' => ['required', 'string', 'max:200', 'min:10']
         ];
-
-        $_validLayanan = $request->validate($validasi, $pesan);
-
+        $request->validate($validasi, $pesan);
         Layanan::create($request->all());
 
         return redirect()->route('layanan')->with('status', 'Data Berhasil Di Tambah Kan');
@@ -67,9 +63,10 @@ class LayananController extends Controller
      * @param  \App\Layanan  $layanan
      * @return \Illuminate\Http\Response
      */
-    public function show(Layanan $layanan)
+    public function show(Layanan $layanan , $id)
     {
-        //
+        $layanan = Layanan::findOrFail($id);
+        return view('layanan.show' , compact('layanan'));
     }
 
     /**
@@ -102,7 +99,7 @@ class LayananController extends Controller
         ];
         $request->validate($validasi, $pesan);
         $layanan->find($id)
-                ->update($request->all());
+            ->update($request->all());
 
         return redirect()->route('layanan')->with('status', 'data berhasil di update');
     }
@@ -113,9 +110,9 @@ class LayananController extends Controller
      * @param  \App\Layanan  $layanan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Layanan $layanan , $id)
+    public function destroy(Layanan $layanan, $id)
     {
         $layanan->find($id)->delete();
-        return redirect()->route('layanan')->with('status', 'Berhasil di Hapus ');
+        return redirect()->route('layanan')->with('status', 'Berhasil di Hapus');
     }
 }
