@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landing');
 });
 Auth::routes();
 Route::group(['prefix' => 'admin'], function (Router $router) {
