@@ -113,8 +113,9 @@ class LayananController extends Controller
      * @param  \App\Layanan  $layanan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Layanan $layanan)
+    public function destroy(Layanan $layanan , $id)
     {
-        //
+        $layanan->find($id)->delete();
+        return redirect()->route('layanan')->with('status', 'Berhasil di Hapus ');
     }
 }

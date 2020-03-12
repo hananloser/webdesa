@@ -25,18 +25,22 @@
                     <th>Action</th>
                 </thead>
                 <tbody>
-                   
+
                     @foreach($layanans as $key => $item)
                     <tr>
                         <td>{{$key+1}}</td>
                         <td>{{$item->layanan}}</td>
                         <td>
-                            <a href="{{route('layanan.edit' , $item->id)}}" class="btn btn-sm btn-primary">
+                            <a href="{{route('layanan.edit' , $item->id)}}" class="btn btn-sm btn-primary floating float-left">
                                 <i class="fa fa-edit"></i>
                             </a>
-                            <a href="" class="btn btn-sm btn-danger">
-                                <i class="fa fa-trash"></i>
-                            </a>
+                            <form action="{{route('layanan.delete' , $item->id)}}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-sm btn-danger floating">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </form>
                         </td>
                     </tr>
                     @endforeach
