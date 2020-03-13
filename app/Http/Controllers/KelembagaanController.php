@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Kelembagaan;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use Image;
-use File;
+// use Image;
+use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\File;
 
 class KelembagaanController extends Controller
 {
@@ -56,7 +57,7 @@ class KelembagaanController extends Controller
             'nama' => 'required|string',
             'jabatan' => 'required|string',
             'kelembagaan' => 'required|string',
-            'foto'  => 'required | mimes:png,jpg',
+            'foto'  => 'required | mimes:png,jpg,jpeg',
         ]);
 
 
