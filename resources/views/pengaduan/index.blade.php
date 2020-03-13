@@ -36,10 +36,6 @@
                             <td>{{$value->pengaduan}}</td>
                             <td>{{$value->nohp}}</td>
                             <td>
-                                <a href="" class="btn btn-sm btn-primary  " data-toggle="tooltip" data-placement="top"
-                                    title="Edit Pengaduan">
-                                    <i class="fa fa-edit"></i>
-                                </a>
                                 <button class="btn btn-sm btn-danger" id="hapus" data-id="{{$value->id}}">
                                     <i class="fa fa-trash"></i>
                                 </button>

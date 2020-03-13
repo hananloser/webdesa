@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\KelembagaanController;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,7 @@ Route::group(['prefix' => 'admin'], function (Router $router) {
 
     // Berikut Na Pake Resouserce Saja
     $router->resource('pengaduan', 'PengaduanController');
+    $router->resource('kelembagaan' , 'KelembagaanController');
 });
 
 Route::group(['prefix' => 'landing'], function (Router $router) {
