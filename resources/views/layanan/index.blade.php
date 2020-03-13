@@ -25,10 +25,9 @@
                     <th>Action</th>
                 </thead>
                 <tbody>
-
                     @foreach($layanans as $key => $item)
                     <tr>
-                        <td>{{$key+1}}</td>
+                        <td>{{$key + 1 }}</td>
                         <td>{{$item->layanan}}</td>
                         <td>
                             <a href="#" data-toggle="tooltip" data-placement="top" title="jumlah syrat di dalam layanan"
@@ -43,22 +42,55 @@
                                 title="Tampilkan syarat " class="btn btn-sm btn-info floating float-left">
                                 <i class="fa fa-eye"></i>
                             </a>
-                            <form action="{{route('layanan.delete' , $item->id)}}" method="post">
-                                @csrf
-                                @method('delete')
-                                <button type="submit" class="btn btn-sm btn-danger floating" data-toggle="tooltip"
-                                    data-placement="top" title="Hapus ">
-
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                            </form>
+                            <button class="btn btn-sm btn-danger" id="hapus" data-id="{{$item->id}}">
+                                <i class="fa fa-trash"></i>
+                            </button>
                         </td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
-            {{ $layanans->links()}}
+            {{ $layanans->appends(request()->query())->links() }}
         </div>
     </div>
 </div>
+@endsection
+
+
+@section('scripts')
+<script>
+    $(document).on('click' , '#hapus' , function(e){
+        let id = $(this).data('id')
+        let token = $("meta[name='csrf-token']").attr("content");
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: "layanan/"+id,
+                    type: 'DELETE',
+                    data: {
+                        "id": id,
+                        "_token": token,
+                    },
+                    success: function (){
+                        console.log("it Works");
+                    }
+                });
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
+                window.location.replace("{!! route('layanan') !!}")
+            }
+        })
+    });
+</script>
 @endsection

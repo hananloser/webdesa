@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Pengaduan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class PengaduanController extends Controller
 {
@@ -14,7 +16,15 @@ class PengaduanController extends Controller
      */
     public function index()
     {
-        return view('pengaduan.index');
+        $pengaduan = Pengaduan::orderBy('created_at', 'DESC')->get();
+
+        return view('pengaduan.index', compact('pengaduan'));
+    }
+
+
+    public function create()
+    {
+        return view('pengaduan.create');
     }
 
     /**
@@ -25,7 +35,20 @@ class PengaduanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required|min:13',
+            'pengaduan' => 'required|min:20',
+            'nohp' => 'required'
+        ]);
+        DB::beginTransaction();
+        Pengaduan::create([
+            'no_pengaduan' => Str::random(5),
+            'nama' => $request->nama,
+            'pengaduan' => $request->pengaduan,
+            'nohp' => $request->nohp
+        ]);
+        DB::commit();
+        return redirect()->route('pengaduan.index')->with('status', 'Pengaduan Berhasil Di Tambah Kan');
     }
 
     /**
@@ -57,8 +80,12 @@ class PengaduanController extends Controller
      * @param  \App\Pengaduan  $pengaduan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pengaduan $pengaduan)
+    public function destroy($id)
     {
-        //
+
+        Pengaduan::find($id)->delete($id);
+        return response()->json([
+            'success' => 'Record deleted successfully!'
+        ]);
     }
 }

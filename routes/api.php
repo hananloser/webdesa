@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Layanan;
+use App\Pengaduan;
 use App\Syrat;
 /*
 |--------------------------------------------------------------------------
@@ -35,4 +36,11 @@ Route::get('syrat', function () {
         ->with('layanan')
         ->get();
     return $syrat;
+});
+
+
+Route::get('pengaduan', function () {
+    $pengaduan = Pengaduan::orderBy('created_at', 'DESC')->get();
+    return $pengaduan ;
+
 });

@@ -23,6 +23,7 @@ class LayananController extends Controller
     public function index()
     {
         $layanans = Layanan::latest()->paginate(5);
+        // return $layanans ;
         return view('layanan.index', compact('layanans'));
     }
 
