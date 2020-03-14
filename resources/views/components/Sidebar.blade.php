@@ -3,7 +3,8 @@
         <!-- Brand -->
         <div class="sidenav-header  align-items-center">
             <a class="navbar-brand" href="javascript:void(0)">
-            <img src="{{asset('assets/img/brand/blue.png')}}" class="navbar-brand-img" alt="...">
+            <img src="{{asset('assets/img/logo.png')}}" class="navbar-brand-img" alt="...">
+            <span class="nav-link-text">Web Bangun Jaya</span>
             </a>
         </div>
         <div class="navbar-inner">
@@ -25,7 +26,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="map.html">
+                    <a class="nav-link" href="{{route('bumdes.index')}}">
                             <i class="ni ni-pin-3 text-primary"></i>
                             <span class="nav-link-text">{{__('Bumdes')}}</span>
                         </a>

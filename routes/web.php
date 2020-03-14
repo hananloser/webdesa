@@ -24,6 +24,7 @@ Route::group(['prefix' => 'admin'], function (Router $router) {
     // Berikut Na Pake Resouserce Saja
     $router->resource('pengaduan', 'PengaduanController');
     $router->resource('kelembagaan' , 'KelembagaanController');
+    $router->resource('bumdes' , 'BumdesController');
 });
 
 Route::group(['prefix' => 'landing'], function (Router $router) {
