@@ -1,37 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{__('Web Desa')}}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('assets/css/app.min.css')}}">
-    <link rel="stylesheet" href="{{ asset('assets/css/demo.css') }}">
-
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
     <link rel="stylesheet" href="{{asset('assets/vendor/nucleo/css/nucleo.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('assets/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}"
         type="text/css">
+    <link rel="stylesheet" href="{{asset('assets/vendor/sweetalert2/dist/sweetalert2.min.css')}}">
+    <!-- Argon CSS -->
+    <link rel="stylesheet" href="{{asset('assets/css/argon.css?v=1.2.0')}}" type="text/css">
 
+
+    <title>Web Desa</title>
 </head>
 
 <body>
-    @include('components.landing.Sidebar')
-    <main>
-        @yield('content')
-    </main>
-    <script>
-        var index = 1;
-        var theme = ['quickly', 'quickly-dark', 'quickly-light'];
-        var body = document.getElementsByTagName('body');
-        document.getElementById('btnTheme').addEventListener('click', function(e) {
-            body[0].classList.remove('quickly-dark', 'quickly-light');
-            body[0].classList.add(theme[index++]);
-            index = (index > 2) ? 0 : index;
-        });
-    </script>
+
+    @include('components.landing.topnav')
+
+
+
+
 </body>
+<script src="{{asset('assets/vendor/jquery/dist/jquery.min.js')}}"></script>
+<script src="{{asset('assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('assets/vendor/js-cookie/js.cookie.js')}}"></script>
+<script src="{{asset('assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js')}}"></script>
+<script src="{{asset('assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js')}}"></script>
+<!-- Optional JS -->
+<script src="{{asset('assets/vendor/chart.js/dist/Chart.min.js')}}"></script>
+<script src="{{asset('assets/vendor/sweetalert2/dist/sweetalert2.min.js')}}"></script>
+<script src="{{asset('assets/vendor/headroom/headroom.min.js')}}"></script>
+<!-- Argon JS -->
+<script src="{{asset('assets/js/argon.js?v=1.2.0')}}"></script>
+@yield('scripts')
 
 </html>
