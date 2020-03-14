@@ -31,7 +31,7 @@
                             <td>{{$key + 1}}</td>
                             <td>{{$item->deskripsi}}</td>
                             <td>
-                                <img src="{{asset('assets/img/logo.png')}}" alt="" height="100" width="100">
+                                <img src="{{asset('storage/bumdes/500/'.$item->foto)}}" alt="" height="100" width="100">
                             </td>
                             <td>
                                 <button class="btn btn-sm btn-danger" id="hapus" data-id="{{$item->id}}">
@@ -65,7 +65,7 @@
         }).then((result) => {
             if (result.value) {
                 $.ajax({
-                    url: '' + id
+                    url: 'bumdes/' + id
                     , type: 'DELETE'
                     , data: {
                         "id": id

@@ -36,7 +36,8 @@
                                 {{ $value->jabatan }}
                             </td>
                             <td>
-                                <img src="{{asset('storage/images/'.$value->foto)}}" alt="{{ asset('assets/img/avatar.png')}}" height="100" width="100">
+                                <img src="{{asset('storage/images/'.$value->foto)}}"
+                                    alt="{{ asset('assets/img/avatar.png')}}" height="100" width="100">
                             </td>
                             <td>{{$value->kelembagaan}}</td>
                             <td>
@@ -57,41 +58,38 @@
 @endsection
 @section('scripts')
 <script>
-    $(document).on('click' , '#hapus' , function(e){
+    $(document).on('click', '#hapus', function(e) {
         let id = $(this).data('id')
         let token = $("meta[name='csrf-token']").attr("content");
         Swal.fire({
             title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+             text: "You won't be able to revert this!",
+             icon: 'warning',
+             showCancelButton: true,
+             confirmButtonColor: '#3085d6',
+             cancelButtonColor: '#d33',
+             confirmButtonText: 'Yes, delete it!',
         }).then((result) => {
             if (result.value) {
                 $.ajax({
-                    url: "pengaduan/"+id,
+                    url: "pengaduan/" + id.
                     type: 'DELETE',
                     data: {
-                        "id": id,
+                        "id": id ,
                         "_token": token,
                     },
-                    success: function (){
-                        console.log("it Works");
+                     success: function() {
+                        console.log("it Works")
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success',
+                        )
+                        window.location.replace("{!! route('kelembagaan.index') !!}");
                     }
                 });
-                Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
-                    'success'
-                )
-                window.location.replace("{!! route('pengaduan.index') !!}");
             }
         })
-
-
-
     });
 
 </script>
