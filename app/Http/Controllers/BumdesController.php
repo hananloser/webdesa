@@ -3,18 +3,39 @@
 namespace App\Http\Controllers;
 
 use App\Bumdes;
+use Carbon\Carbon;
+
+// Import Image Carbon , Dan FIle
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class BumdesController extends Controller
 {
+
+    public $path;
+    public $dimensions;
+
+    // DEFINISIKAN CONStrUCTOR JIKA CLASSS DI PANGGIL
+    // PROPERTIY AKAN SEDIAKAN SECARA LANGSUNG
+    public function __construct()
+    {
+        //DEFINISIKAN PATH
+        $this->path = storage_path('app/public/bumdes');
+        //DEFINISIKAN DIMENSI
+        $this->dimensions = ['245', '300', '500'];
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        //
+        $bumdes = Bumdes::all();
+        return view('bumdes.index', compact('bumdes'));
     }
 
     /**
@@ -22,9 +43,10 @@ class BumdesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
-        //
+        return view('bumdes.create');
     }
 
     /**
@@ -33,9 +55,67 @@ class BumdesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'deskripsi' => 'required|string',
+            // Validasi Hanya Akan Menerima Yang bertipe png , jpg , jpeg
+            'foto' => 'required | mimes:png,jpg,jpeg',
+        ]);
+
+        // JIKA FOLDERNYA BELUM ADA
+        if (!File::isDirectory($this->path)) {
+            //MAKA FOLDER TERSEBUT AKAN DIBUAT
+            File::makeDirectory($this->path);
+        }
+
+        // MENGAMBIL FILE FOTO DARI FORM MENJADI REQUEST
+        $file = $request->file('foto');
+        // MEMBUAT NAME FILE DARI GABUNGAN TIMESTAMP DAN UNIQID()
+        $fileName = Carbon::now()->timestamp . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+        //UPLOAD ORIGINAN FILE (BELUM DIUBAH DIMENSINYA)
+        Image::make($file)->save($this->path . '/' . $fileName);
+
+        //*  LOOPING PROPERTY DIMENSI YANG TELAH DI DEFINISAKAN DI CONSTRUCTOR
+        foreach ($this->dimensions as $row) {
+            // * MEMBUAT CANVAS IMAGE SEBESAR DIMENSI YANG ADA DI DALAM ARRAY
+            $canvas = Image::canvas($row, $row);
+            // * RESIZE IMAGE SESUAI DIMENSI YANG ADA DIDALAM ARRAY
+            // * DENGAN MEMPERTAHANKAN RATIO
+            // * Setalah iterasi dimensi di Dapat Kan Masuka Dalam Fungsi Rezie($Row $ROW , callBack() / closerure)
+            // * Buat Prameter Yang Akan Di Terima Dari Fungsi Reize
+            $resizeImage = Image::make($file)->resize($row, $row, function ($constraint) {
+                // ! FUNGSI INI YANG MEMBUAT MEMPERTAHAN KAN RATIO
+                $constraint->aspectRatio();
+            });
+
+            // * CEK JIKA FOLDERNYA BELUM ADA
+            // * Ini akan Membuat Folder Berberapa Ratio
+            if (!File::isDirectory($this->path . '/' . $row)) {
+                //MAKA BUAT FOLDER DENGAN NAMA DIMENSI
+                File::makeDirectory($this->path . '/' . $row);
+            }
+
+            //* MEMASUKAN IMAGE YANG TELAH DIRESIZE KE DALAM CANVAS
+            $canvas->insert($resizeImage, 'center');
+
+            // * SIMPAN IMAGE KE DALAM MASING-MASING FOLDER (DIMENSI)
+            $canvas->save($this->path . '/' . $row . '/' . $fileName);
+        }
+
+        // * Setalah Semua Telah Di Lakukan Simpan Gamar nya
+        Bumdes::create([
+            // Ini Yang Akan Di kirim Dari Form
+            'deskripsi' => $request->deskripsi,
+            // !  Memasukan Nama File Yang Telah Di Definisikan DI varibale $fileName
+            'foto' => $fileName,
+        ]);
+
+        // Setalah Semua Sudah Redirect KeHalaman Ini Kembali
+        return redirect()->back()->with('status', 'Data Berhasil Di Tambahkan');
+
     }
 
     /**
@@ -44,6 +124,7 @@ class BumdesController extends Controller
      * @param  \App\Bumdes  $bumdes
      * @return \Illuminate\Http\Response
      */
+
     public function show(Bumdes $bumdes)
     {
         //
@@ -55,6 +136,7 @@ class BumdesController extends Controller
      * @param  \App\Bumdes  $bumdes
      * @return \Illuminate\Http\Response
      */
+
     public function edit(Bumdes $bumdes)
     {
         //
@@ -67,6 +149,7 @@ class BumdesController extends Controller
      * @param  \App\Bumdes  $bumdes
      * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request, Bumdes $bumdes)
     {
         //
@@ -78,8 +161,12 @@ class BumdesController extends Controller
      * @param  \App\Bumdes  $bumdes
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bumdes $bumdes)
+
+    public function destroy($id)
     {
-        //
+        Bumdes::find($id)->delete($id);
+        return response()->json([
+            'success' => 'Record deleted successfully!',
+        ]);
     }
 }
