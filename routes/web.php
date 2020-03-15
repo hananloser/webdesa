@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'LandingController@index');
 
-
 Auth::routes();
     Route::match(['get', 'post'], '/register', function () {
         return redirect('/login');
