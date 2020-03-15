@@ -4,15 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Layanan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class LayananController extends Controller
 {
+
+
     /**
      * Construct Ketika Route Di panggil
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(function($request , $next){
+            if(Gate::allows('isAdmin')) return $next($request);
+            abort('403' , 'Akses Tidak Sah');
+        });
     }
 
     /**

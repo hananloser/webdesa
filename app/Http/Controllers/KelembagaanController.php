@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Kelembagaan;
-use Illuminate\Http\Request;
 use Carbon\Carbon;
-// use Image;
-use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Gate;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class KelembagaanController extends Controller
 {
@@ -15,9 +15,15 @@ class KelembagaanController extends Controller
     public $path;
     public $dimensions;
 
-
     public function __construct()
     {
+        $this->middleware(function ($request, $next) {
+            if (Gate::allows('isAdmin')) {
+                return $next($request);
+            }
+            abort('403', 'Akses Tidak Sah');
+        });
+
         //DEFINISIKAN PATH
         $this->path = storage_path('app/public/images');
         //DEFINISIKAN DIMENSI
@@ -57,9 +63,8 @@ class KelembagaanController extends Controller
             'nama' => 'required|string',
             'jabatan' => 'required|string',
             'kelembagaan' => 'required|string',
-            'foto'  => 'required | mimes:png,jpg,jpeg',
+            'foto' => 'required | mimes:png,jpg,jpeg',
         ]);
-
 
         // JIKA FOLDERNYA BELUM ADA
         if (!File::isDirectory($this->path)) {
@@ -81,7 +86,7 @@ class KelembagaanController extends Controller
             $canvas = Image::canvas($row, $row);
             //RESIZE IMAGE SESUAI DIMENSI YANG ADA DIDALAM ARRAY
             //DENGAN MEMPERTAHANKAN RATIO
-            $resizeImage  = Image::make($file)->resize($row, $row, function ($constraint) {
+            $resizeImage = Image::make($file)->resize($row, $row, function ($constraint) {
                 $constraint->aspectRatio();
             });
 
@@ -101,7 +106,7 @@ class KelembagaanController extends Controller
             'nama' => $request->nama,
             'jabatan' => $request->jabatan,
             'kelembagaan' => $request->kelembagaan,
-            'foto' => $fileName
+            'foto' => $fileName,
         ]);
         return redirect()->back()->with(['status' => 'Data Berhasil Di Tambahkan']);
     }

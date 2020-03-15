@@ -4,11 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Pengaduan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Gate;
 
 class PengaduanController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (Gate::allows('isAdmin')) {
+                return $next($request);
+            }
+            abort('403', 'Akses Tidak Sah');
+        });
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +32,6 @@ class PengaduanController extends Controller
 
         return view('pengaduan.index', compact('pengaduan'));
     }
-
 
     public function create()
     {
@@ -38,14 +49,14 @@ class PengaduanController extends Controller
         $request->validate([
             'nama' => 'required|min:13',
             'pengaduan' => 'required|min:20',
-            'nohp' => 'required'
+            'nohp' => 'required',
         ]);
         DB::beginTransaction();
         Pengaduan::create([
             'no_pengaduan' => Str::random(5),
             'nama' => $request->nama,
             'pengaduan' => $request->pengaduan,
-            'nohp' => $request->nohp
+            'nohp' => $request->nohp,
         ]);
         DB::commit();
         return redirect()->route('pengaduan.index')->with('status', 'Pengaduan Berhasil Di Tambah Kan');
@@ -85,7 +96,7 @@ class PengaduanController extends Controller
 
         Pengaduan::find($id)->delete($id);
         return response()->json([
-            'success' => 'Record deleted successfully!'
+            'success' => 'Record deleted successfully!',
         ]);
     }
 }

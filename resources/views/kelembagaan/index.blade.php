@@ -36,8 +36,7 @@
                                 {{ $value->jabatan }}
                             </td>
                             <td>
-                                <img src="{{asset('storage/images/'.$value->foto)}}"
-                                    alt="{{ asset('assets/img/avatar.png')}}" height="100" width="100">
+                                <img src="{{asset('storage/images/'.$value->foto)}}" height="100" width="100">
                             </td>
                             <td>{{$value->kelembagaan}}</td>
                             <td>
@@ -61,6 +60,7 @@
     $(document).on('click', '#hapus', function(e) {
         let id = $(this).data('id')
         let token = $("meta[name='csrf-token']").attr("content");
+        console.log(token);
         Swal.fire({
             title: 'Are you sure?',
              text: "You won't be able to revert this!",
@@ -72,7 +72,7 @@
         }).then((result) => {
             if (result.value) {
                 $.ajax({
-                    url: "pengaduan/" + id.
+                    url: "pengaduan/" + id,
                     type: 'DELETE',
                     data: {
                         "id": id ,

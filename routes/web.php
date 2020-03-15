@@ -1,16 +1,17 @@
 <?php
 
-use App\Http\Controllers\KelembagaanController;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('landing');
-});
+Route::get('/', 'LandingController@index');
+
 
 Auth::routes();
-Route::group(['prefix' => 'admin'], function (Router $router) {
+    Route::match(['get', 'post'], '/register', function () {
+        return redirect('/login');
+    });
+Route::group([ 'middleware' => ['auth'] ,'prefix' => 'admin'], function (Router $router) {
     $router->get('/home', 'HomeController@index')->name('home');
     $router->get('/layanan', 'LayananController@index')->name('layanan');
     $router->get('/layanan/create', 'LayananController@create')->name('layanan.create');
@@ -20,15 +21,13 @@ Route::group(['prefix' => 'admin'], function (Router $router) {
     $router->put('/layanan/{edit}', 'LayananController@update')->name('layanan.update');
     $router->delete('/layanan/{edit}', 'LayananController@destroy')->name('layanan.delete');
     $router->post('/layanan', 'LayananController@store')->name('layanan.store');
-
     // Berikut Na Pake Resouserce Saja
     $router->resource('pengaduan', 'PengaduanController');
-    $router->resource('kelembagaan' , 'KelembagaanController');
-    $router->resource('bumdes' , 'BumdesController');
-});
-
-Route::group(['prefix' => 'landing'], function (Router $router) {
-    $router->get('/aparat' , 'LandingController@aparat')->name('landing.aparat');
+    $router->resource('kelembagaan', 'KelembagaanController');
+    $router->resource('bumdes', 'BumdesController');
 });
 
 
+Route::fallback(function(){
+   return redirect('/');
+});

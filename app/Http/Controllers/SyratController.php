@@ -5,9 +5,21 @@ namespace App\Http\Controllers;
 use App\Layanan;
 use App\Syrat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class SyratController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (Gate::allows('isAdmin')) {
+                return $next($request);
+            }
+            abort('403', 'Akses Tidak Sah');
+        });
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -49,7 +61,6 @@ class SyratController extends Controller
                 'syrat' => $value
             ];
         }
-
         $layanan->syrats()->createMany($syarats);
         $layanan->save();
 

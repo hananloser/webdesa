@@ -9,7 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\ImageManagerStatic as Image;
-
+use Illuminate\Support\Facades\Gate ;
 class BumdesController extends Controller
 {
 
@@ -20,6 +20,12 @@ class BumdesController extends Controller
     // PROPERTIY AKAN SEDIAKAN SECARA LANGSUNG
     public function __construct()
     {
+        // Cek Status User Apakah Admin Apa Bukan
+        $this->middleware(function($request , $next){
+            if(Gate::allows('isAdmin')) return $next($request);
+            abort(403 , 'Maaf Anda Tidak Memiliki Hak Akses Untuk Halaman Ini');
+        });
+
         //DEFINISIKAN PATH
         $this->path = storage_path('app/public/bumdes');
         //DEFINISIKAN DIMENSI
