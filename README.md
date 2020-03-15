@@ -9,10 +9,15 @@
 * [x] new Register form
 * [x] Layanan Crud done
 * [x] add crud layanan with relation
-* [ ] add crud with image bumdes
-* [ ] add crud with image pengaduan
+* [x] add crud with image bumdes
+* [x] add crud with image pengaduan
 * [ ] add crud with image statis penduduk bangun jaya
-* [ ] add crud kelembagaan with image
+* [x] add crud kelembagaan with image
 * [ ] add upload image for RAPDes
+
+## Front End
+
+* [ ] add template :tada: 
+* [ ] show slide Bumdes :tada:
 
 
