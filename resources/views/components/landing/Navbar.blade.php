@@ -1,8 +1,8 @@
-<nav class="navbar navbar-expand-lg fixed-top navbar-transparent " color-on-scroll="300">
+<nav class="navbar navbar-expand-lg fixed-bottom navbar-transparent " color-on-scroll="300">
     <div class="container">
         <div class="navbar-translate">
-            <a class="navbar-brand" href="https://demos.creative-tim.com/paper-kit/index.html" rel="tooltip"
-                title="Coded by Creative Tim" data-placement="bottom" target="_blank">
+        <a class="navbar-brand" href="{{url('/')}}" rel="tooltip"
+                title="Code By Hanan" data-placement="bottom">
                 Bangun Jaya
             </a>
             <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"

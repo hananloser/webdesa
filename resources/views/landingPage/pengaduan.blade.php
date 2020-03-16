@@ -57,7 +57,7 @@
 
 <div class="container">
     <div class="card">
-        <h1 class="header">Halaman Aparat</h1>
+        <h1 class="header">Halaman Pengaduan</h1>
     </div>
 </div>
 @endsection

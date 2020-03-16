@@ -53,80 +53,45 @@
         </a>
     </div>
 </div>
-
-
 <div class="blog-5">
     <div class="container">
       <h2 class="title text-center">Berita Seputar Desa</h2>
-      @foreach($bumdes as $item)
       <div class="row">
-        <div class="col-md-3">
-          <div class="card" data-background="image" style="background-image: url('./assets/img/sections/pavel-kosov.jpg')">
-            <div class="card-body">
-              <h6 class="card-category">
-                <i class="fa fa-newspaper-o"></i>Design</h6>
-              <a href="#pablo">
-                <h3 class="card-title">“Good Design”</h3>
-              </a>
-              <p class="card-description">
-                Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Jay-z...
-              </p>
-              <div class="card-footer">
-                <div class="author">
-                  <a href="#pablo" class="btn btn-primary">
-                    <span>BACA</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        @foreach($bumdes as $item)
         <div class="col-md-6">
-          <div class="card" data-background="image" style="background-image: url('./assets/img/sections/ilya-yakover.jpg')">
+        <div class="card card-background-image" data-background="image" style="background-image: url('{{asset('storage/bumdes/'.$item->foto)}}') ; background-size : 100% 100%">
             <div class="card-body">
               <h6 class="card-category">
-                <i class="fa fa-newspaper-o"></i> Development</h6>
+                <i class="fa fa-newspaper-o"></i>Bumdes</h6>
               <a href="#pablo">
-                <h3 class="card-title">In need of a good development</h3>
+              <h3 class="card-title">{{$item->deskripsi}}</h3>
               </a>
               <p class="card-description">
-                Speed up your development time or get inspired with the large number of example pages. You can jump start your development with our pre-built example pages.
+                {{-- Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Jay-z... --}}
               </p>
-              <div class="card-footer">
-                <div class="author">
-                  <a href="#pablo" class="btn btn-primary">
-                    <span>Baca</span>
-                  </a>
-                </div>
-              </div>
             </div>
           </div>
         </div>
-        <div class="col-md-3">
-          <div class="card" data-background="image" style="background-image: url('./assets/img/sections/vincent-versluis.jpg')">
-            <div class="card-body">
-              <h6 class="card-category">
-                <i class="fa fa-newspaper-o"></i> Technology</h6>
-              <a href="#pablo">
-                <h3 class="card-title">A Little Adrift</h3>
-              </a>
-              <p class="card-description">
-                But from the perspective of founders, there’s bound to be some confusion. In an ideal world we will see a meeting of the minds
-              </p>
-              <div class="card-footer">
-                <div class="author">
-                  <a href="#pablo" class="btn btn-success">
-
-                    <span>Baca</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        @endforeach
       </div>
-      @endforeach
+      <div class="row">
+        @foreach($aparat as $item)
+        <div class="col-md-3 col-xs-3 col-sm-3">
+        <div class="card" data-background="image" style="background-image: url('{{asset('storage/images/'.$item->foto)}}') ;  background-size : 100% 100%">
+            <div class="card-body">
+              <h6 class="card-category">
+                <i class="fa fa-newspaper-o"></i>Aparat Desa </h6>
+              <a href="#pablo">
+              <h4 class="card-title">{{$item->nama}}</h4>
+              </a>
+              <p class="card-description">
+                {{ $item->jabatan }} | {{ $item->kelembagaan }}
+              </p>
+            </div>
+          </div>
+        </div>
+        @endforeach
+      </div>
     </div>
   </div>
-
 @endsection

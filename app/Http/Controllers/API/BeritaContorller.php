@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class BeritaContorller extends Controller
 {
+
+    public $headers = [
+        'Content-Type' => 'application/json',
+        'X-Requested-With' => 'XMLHttpRequest',
+    ];
+
     /**
      * Display a listing of the resource.
      *
@@ -15,8 +21,8 @@ class BeritaContorller extends Controller
      */
     public function index()
     {
-        $layanan = Berita::all();
-        return response()->json($layanan, 200, $this->headers);
+        $berita = Berita::all();
+        return response()->json($berita, 200, $this->headers);
     }
     /**
      * Store a newly created resource in storage.
