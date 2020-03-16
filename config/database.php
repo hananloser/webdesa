@@ -2,6 +2,15 @@
 
 use Illuminate\Support\Str;
 
+
+$url = parse_url(getenv("postgres://cslgkyrvwatjcn:c5d5835b518fa89cf74dd025ac35726970a69ce7a9d73b90b3df02477670c565@ec2-52-86-33-50.compute-1.amazonaws.com:5432/dnvrn1jp77vt9"));
+
+$host = $url["ec2-52-86-33-50.compute-1.amazonaws.com"];
+$username = $url["cslgkyrvwatjcn"];
+$password = $url["c5d5835b518fa89cf74dd025ac35726970a69ce7a9d73b90b3df02477670c565"];
+$database = substr($url["path"], 1);
+
+
 return [
 
     /*
