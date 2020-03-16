@@ -18,7 +18,7 @@
 </head>
 
 <body>
-    @include('components.sidebar')
+    @include('components.Sidebar')
 
     <div class="main-content" id="panel">
         <!-- Topnav -->
