@@ -4,12 +4,14 @@ use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', 'LandingController@index');
 
 Auth::routes();
+// Disable Register Page
 Route::match(['get', 'post'], '/register', function () {
     return redirect('/login');
 });
+
+// Route For Admin
 
 Route::group([ 'middleware' => ['auth'] ,'prefix' => 'admin'], function (Router $router) {
     $router->get('/home', 'HomeController@index')->name('home');
@@ -27,9 +29,14 @@ Route::group([ 'middleware' => ['auth'] ,'prefix' => 'admin'], function (Router 
     $router->resource('bumdes', 'BumdesController');
 });
 
-$router->get('/landing/layanan' , 'LandingController@layanan')->name('landing.layanan');
-$router->get('/landing/aparat' , 'LandingController@aparat')->name('landing.aparat');
-$router->get('/landing/pengaduan' , 'LandingController@pengaduan')->name('landing.pengaduan');
+// Route For Landing Page
+$router->get('/' , 'LandingController@index')->name('landing.index');
+Route::group(['prefix' => 'landing'], function (Router $router) {
+    $router->get('/landing/layanan' , 'LandingController@layanan')->name('landing.layanan');
+    $router->get('/landing/aparat' , 'LandingController@aparat')->name('landing.aparat');
+    $router->get('/landing/pengaduan' , 'LandingController@pengaduan')->name('landing.pengaduan');
+});
+
 
 Route::fallback(function(){
    return redirect('/');

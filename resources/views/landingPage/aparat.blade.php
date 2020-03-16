@@ -53,7 +53,6 @@
     </div>
 </div>
 
-
 <div class="container">
     <div class="card">
         <h1 class="header">Halaman Aparat</h1>
