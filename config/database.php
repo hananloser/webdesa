@@ -3,12 +3,12 @@
 use Illuminate\Support\Str;
 
 
-$url = parse_url(getenv("postgres://cslgkyrvwatjcn:c5d5835b518fa89cf74dd025ac35726970a69ce7a9d73b90b3df02477670c565@ec2-52-86-33-50.compute-1.amazonaws.com:5432/dnvrn1jp77vt9"));
+// $url = parse_url(getenv("postgres://cslgkyrvwatjcn:c5d5835b518fa89cf74dd025ac35726970a69ce7a9d73b90b3df02477670c565@ec2-52-86-33-50.compute-1.amazonaws.com:5432/dnvrn1jp77vt9"));
 
-$host = $url["ec2-52-86-33-50.compute-1.amazonaws.com"];
-$username = $url["cslgkyrvwatjcn"];
-$password = $url["c5d5835b518fa89cf74dd025ac35726970a69ce7a9d73b90b3df02477670c565"];
-$database = substr($url["path"], 1);
+// $host = $url["ec2-52-86-33-50.compute-1.amazonaws.com"];
+// $username = $url["cslgkyrvwatjcn"];
+// $password = $url["c5d5835b518fa89cf74dd025ac35726970a69ce7a9d73b90b3df02477670c565"];
+// $database = substr($url["path"], 1);
 
 
 return [
@@ -24,7 +24,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'pgsql'),
+    'default' => env('DB_CONNECTION', 'mysql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -72,35 +72,35 @@ return [
             ]) : [],
         ],
 
-        // 'pgsql' => [
-        //     'driver' => 'pgsql',
-        //     'url' => env('DATABASE_URL'),
-        //     'host' => env('DB_HOST', '127.0.0.1'),
-        //     'port' => env('DB_PORT', '5432'),
-        //     'database' => env('DB_DATABASE', 'forge'),
-        //     'username' => env('DB_USERNAME', 'forge'),
-        //     'password' => env('DB_PASSWORD', ''),
-        //     'charset' => 'utf8',
-        //     'prefix' => '',
-        //     'prefix_indexes' => true,
-        //     'schema' => 'public',
-        //     'sslmode' => 'prefer',
-        // ],
-
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
-            'host' => $host,
+            'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '5432'),
-            'database' => $database,
-            'username' => $username,
-            'password' => $password,
+            'database' => env('DB_DATABASE', 'forge'),
+            'username' => env('DB_USERNAME', 'forge'),
+            'password' => env('DB_PASSWORD', ''),
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
             'schema' => 'public',
             'sslmode' => 'prefer',
         ],
+
+        // 'pgsql' => [
+        //     'driver' => 'pgsql',
+        //     'url' => env('DATABASE_URL'),
+        //     'host' => $host,
+        //     'port' => env('DB_PORT', '5432'),
+        //     'database' => $database,
+        //     'username' => $username,
+        //     'password' => $password,
+        //     'charset' => 'utf8',
+        //     'prefix' => '',
+        //     'prefix_indexes' => true,
+        //     'schema' => 'public',
+        //     'sslmode' => 'prefer',
+        // ],
 
         'sqlsrv' => [
             'driver' => 'sqlsrv',
