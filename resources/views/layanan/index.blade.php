@@ -50,7 +50,7 @@
                     @endforeach
                 </tbody>
             </table>
-            {{ $layanans->appends(request()->query())->links() }}
+            {{ $layanans->links() }}
         </div>
     </div>
 </div>

@@ -28,7 +28,7 @@ class LayananController extends Controller
      */
     public function index()
     {
-        $layanans = Layanan::latest()->paginate(5);
+        $layanans = Layanan::with('syrats')->orderBy('created_at' , 'desc')->paginate(5);
         // return $layanans ;
         return view('layanan.index', compact('layanans'));
     }

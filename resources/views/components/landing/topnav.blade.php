@@ -1,4 +1,4 @@
-<nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom .headroom">
+<nav class="navbar navbar-top navbar-expand navbar-dark bg-translucent-primary border-bottom .headroom">
     <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Search form -->
@@ -35,7 +35,7 @@
                     </a>
                 </li>
             </ul>
-            @if(Route::has('login')) 
+            @if(Route::has('login'))
             @auth
             <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
                 <li class="nav-item dropdown">

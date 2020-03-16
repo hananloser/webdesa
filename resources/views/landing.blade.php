@@ -55,7 +55,7 @@
 </div>
 <div class="blog-5">
     <div class="container">
-      <h2 class="title text-center">Berita Seputar Desa</h2>
+      <h2 class="title text-center">Bumdes</h2>
       <div class="row">
         @foreach($bumdes as $item)
         <div class="col-md-6">
@@ -74,6 +74,7 @@
         </div>
         @endforeach
       </div>
+      <h2 class="title text-center">kelembagaan Desa </h2>
       <div class="row">
         @foreach($aparat as $item)
         <div class="col-md-3 col-xs-3 col-sm-3">
