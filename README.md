@@ -17,7 +17,13 @@
 
 ## Front End
 
-* [ ] add template :tada: 
-* [ ] show slide Bumdes :tada:
+* [x] add template :tada: 
+* [x] show slide Bumdes :tada:
+
+## Send Message to Telegram
+
+* [x] init telegram with curl 
+* [x] get Token from Telegram
+* [x] send Message When data is added
 
 

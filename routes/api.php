@@ -23,4 +23,4 @@ use App\Kelembagaan ;
 
 Route::resource('layanan', 'API\LayananController')->only('index' , 'show');
 Route::resource('aparat', 'API\AparatdesaController')->only('index' , 'show');
-Route::resource('pengaduan', 'API\PengaduanController')->only('store');
+Route::resource('pengaduan', 'API\PengaduanController');

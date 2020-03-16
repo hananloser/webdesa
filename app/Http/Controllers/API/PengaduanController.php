@@ -5,7 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Pengaduan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str ;
+use Illuminate\Support\Str;
+
 class PengaduanController extends Controller
 {
 
@@ -24,7 +25,11 @@ class PengaduanController extends Controller
      */
     public function index()
     {
-        //
+
+        return response()->json([
+            'status' => 'oke',
+        ]);
+
     }
 
     /**
@@ -37,7 +42,7 @@ class PengaduanController extends Controller
     {
         $request->validate([
             'nama' => 'required',
-            'nohp' => 'required|numeric',
+            'nohp' => 'required|numeric|min:11',
             'pengaduan' => 'required',
         ]);
 
@@ -45,12 +50,11 @@ class PengaduanController extends Controller
             'no_pengaduan' => Str::uuid(5),
             'nama' => $request->nama,
             'nohp' => $request->nohp,
-            'pengaduan' => $request->pengaduan
+            'pengaduan' => $request->pengaduan,
         ]);
-        return response()->json([
-            'status' => 200,
-            'pesan' => 'Data Berhasil Di Buat',
-        ], 201, $this->headers);
+
+        $aduan = Pengaduan::latest()->first();
+        return $this->kirimPesan($aduan->no_pengaduan, $aduan->pengaduan, $aduan->nohp);
 
     }
 
@@ -87,4 +91,40 @@ class PengaduanController extends Controller
     {
         //
     }
+
+    private function getTelegram($url, $params)
+    {
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, $url . $params);
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 3);
+        $content = curl_exec($ch);
+        curl_close($ch);
+        return json_decode($content, true);
+
+    }
+    private function kirimPesan($nope, $pengaduan, $nohp)
+    {
+
+        $key = env('TELEGRAM_KEY', null);
+
+        $chat = $this->getTelegram('https://api.telegram.org/' . $key . '/getUpdates', '');
+
+        // $text = "A new contact us query\n"
+        //     . "<b>Nomor Pengaduan: </b>\n"
+        //     . "$nope\n"
+        //     . "<b>Message: </b>\n"
+        //     . $pengaduan
+        //     . "<b>No HP: </b>\n"
+        //     . $nohp;
+
+        if ($chat['ok']) {
+            $chat_id = $chat['result'][0]['message']['chat']['id'];
+            $pesan = 'Hai Admin Desa Bangun Jaya ' . $nope . ' | Ingin Mengadukan ' . $pengaduan . 'Segera Di Cek | NO:HP' . $nohp;
+            return $this->getTelegram('https://api.telegram.org/' . $key . '/sendMessage', '?chat_id=' . $chat_id . '&text=' . $pesan);
+        }
+    }
+
 }
