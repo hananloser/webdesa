@@ -112,14 +112,6 @@ class PengaduanController extends Controller
 
         $chat = $this->getTelegram('https://api.telegram.org/' . $key . '/getUpdates', '');
 
-        // $text = "A new contact us query\n"
-        //     . "<b>Nomor Pengaduan: </b>\n"
-        //     . "$nope\n"
-        //     . "<b>Message: </b>\n"
-        //     . $pengaduan
-        //     . "<b>No HP: </b>\n"
-        //     . $nohp;
-
         if ($chat['ok']) {
             $chat_id = $chat['result'][0]['message']['chat']['id'];
             $pesan = 'Hai Admin Desa Bangun Jaya ' . $nope . ' | Ingin Mengadukan ' . $pengaduan . 'Segera Di Cek | NO:HP' . $nohp;

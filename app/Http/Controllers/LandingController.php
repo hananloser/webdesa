@@ -15,7 +15,13 @@ class LandingController extends Controller
 
     public function aparat()
     {
-        return view('landingPage.aparatdesa');
+        $bumdes = Bumdes::all();
+        return view('landingPage.aparat' , ['bumdes' => $bumdes]);
+    }
+
+    public function layanan(){
+        $bumdes = Bumdes::all();
+        return view('landingPage.layanan' , ['bumdes' => $bumdes]);
     }
 
 }

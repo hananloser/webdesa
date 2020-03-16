@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'LandingController@index');
 
 Auth::routes();
-
 Route::match(['get', 'post'], '/register', function () {
     return redirect('/login');
 });
@@ -28,6 +27,9 @@ Route::group([ 'middleware' => ['auth'] ,'prefix' => 'admin'], function (Router 
     $router->resource('bumdes', 'BumdesController');
 });
 
+$router->get('/landing/layanan' , 'LandingController@layanan')->name('landing.layanan');
+$router->get('/landing/aparat' , 'LandingController@aparat')->name('landing.aparat');
+$router->get('/landing/pengaduan' , 'LandingController@pengaduan')->name('landing.pengaduan');
 
 Route::fallback(function(){
    return redirect('/');

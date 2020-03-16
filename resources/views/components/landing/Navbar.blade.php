@@ -15,7 +15,7 @@
         <div class="collapse navbar-collapse justify-content-end" id="navigation">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a href="../index.html" class="nav-link"><i class="nc-icon nc-layout-11"></i> Layanan </a>
+                <a href="{{route('landing.layanan')}}" class="nav-link"><i class="nc-icon nc-layout-11"></i> Layanan </a>
                 </li>
                 <li class="nav-item">
                     <a href="https://demos.creative-tim.com/paper-kit-2/docs/1.0/getting-started/introduction.html"
