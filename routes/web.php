@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
+Route::get('/', 'LandingController@index');
+
 Auth::routes();
 // Disable Register Page
 Route::match(['get', 'post'], '/register', function () {
@@ -30,7 +32,6 @@ Route::group([ 'middleware' => ['auth'] ,'prefix' => 'admin'], function (Router 
 });
 
 // Route For Landing Page
-$router->get('/' , 'LandingController@index')->name('landing.index');
 Route::group(['prefix' => 'landing'], function (Router $router) {
     $router->get('/landing/layanan' , 'LandingController@layanan')->name('landing.layanan');
     $router->get('/landing/aparat' , 'LandingController@aparat')->name('landing.aparat');
@@ -38,6 +39,6 @@ Route::group(['prefix' => 'landing'], function (Router $router) {
 });
 
 
-Route::fallback(function(){
-   return redirect('/');
-});
+// Route::fallback(function(){
+//    return redirect('/');
+// });

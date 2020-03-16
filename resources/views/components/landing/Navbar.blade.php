@@ -18,8 +18,7 @@
                 <a href="{{route('landing.layanan')}}" class="nav-link"><i class="nc-icon nc-layout-11"></i> Layanan </a>
                 </li>
                 <li class="nav-item">
-                    <a href="https://demos.creative-tim.com/paper-kit-2/docs/1.0/getting-started/introduction.html"
-                        target="_blank" class="nav-link"><i class="nc-icon nc-book-bookmark"></i>Pengaduan</a>
+                <a href="{{route('landing.pengaduan')}}" class="nav-link"><i class="nc-icon nc-book-bookmark"></i>Pengaduan</a>
                 </li>
             </ul>
         </div>

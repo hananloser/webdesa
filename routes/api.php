@@ -23,4 +23,5 @@ use App\Kelembagaan ;
 
 Route::resource('layanan', 'API\LayananController')->only('index' , 'show');
 Route::resource('aparat', 'API\AparatdesaController')->only('index' , 'show');
+Route::resource('berita', 'API\BeritaContorller')->only('index');
 Route::resource('pengaduan', 'API\PengaduanController');

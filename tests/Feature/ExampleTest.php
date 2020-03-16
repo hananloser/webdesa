@@ -2,19 +2,34 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testBasicTest()
+
+    public function test_uri()
     {
-        $response = $this->get('/');
-        $response->assertStatus(200);
+        $res = $this->get('/');
+        $res->assertStatus(500);
+
     }
+
+    public function test_get_login_tanapa_login()
+    {
+        $response = $this->get('/admin/layanan');
+        $response->assertStatus(302);
+    }
+
+    public function test_get_login_ke_bumdes()
+    {
+        $response = $this->get('/admin/bumdes');
+        $response->assertStatus(302);
+    }
+
+    public function test_get_landing_layanan(){
+        $response = $this->get('/landing/layanan');
+        $response->assertStatus(302);
+    }
+
+
 }
