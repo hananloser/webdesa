@@ -3,7 +3,7 @@
 <div class="col-xl-12 col-md-8">
     <div class="card">
         <div class="card-header">
-            {{__('Kelembagaan')}}
+            {{__('Bumdes')}}
             <a href="{{route('bumdes.create')}}" class="btn btn-primary float-right">Tambah</a>
         </div>
         <div class="card-body">

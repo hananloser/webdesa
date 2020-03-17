@@ -3,7 +3,7 @@
 <div class="col-xl-12 col-md-8">
     <div class="card">
         <div class="card-header bg-info">
-            <span class="text-white text-bold">{{__('Pengaduan')}}</span>
+            <span class="text-white text-bold">{{__('Kelambagaan')}}</span>
         </div>
         <div class="card-body">
             <form action="{{route('bumdes.store')}}" method="post" enctype="multipart/form-data">
