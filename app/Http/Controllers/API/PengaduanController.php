@@ -55,7 +55,7 @@ class PengaduanController extends Controller
             ]);
 
             $aduan = Pengaduan::latest()->first();
-            return $this->kirimPesan($aduan->no_pengaduan, $aduan->pengaduan, $aduan->nohp);
+            $this->kirimPesan($aduan->pengaduan, $aduan->nohp);
 
         } catch (\Throwable $th) {
             //throw $th;
@@ -114,7 +114,7 @@ class PengaduanController extends Controller
         return json_decode($content, true);
 
     }
-    private function kirimPesan($nope, $pengaduan, $nohp)
+    private function kirimPesan( $pengaduan, $nohp)
     {
 
         $key = env('TELEGRAM_KEY', null);
@@ -122,7 +122,7 @@ class PengaduanController extends Controller
 
         if ($chat['ok']) {
             $chat_id = $chat['result'][0]['message']['chat']['id'];
-            $pesan = 'Hai Admin Desa Bangun Jaya ' . $nope . ' | Ingin Mengadukan ' . $pengaduan . 'Segera Di Cek | NO:HP' . $nohp;
+            $pesan = 'Hai Admin Desa Bangun Jaya | Ingin Mengadukan ' . $pengaduan . 'Segera Di Cek | NO:HP' . $nohp;
             return $this->getTelegram('https://api.telegram.org/' . $key . '/sendMessage', '?chat_id=' . $chat_id . '&text=' . $pesan);
         }
     }
