@@ -20,9 +20,9 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
 </head>
 
-<body class="landing-page sidebar-collapse">
+<body class="bg-dark">
     <!-- Navbar -->
-    @include('components.landing.Navbar')
+    {{-- @include('components.landing.Navbar') --}}
     <!-- End Navbar -->
     <div class="main">
        @yield('content')

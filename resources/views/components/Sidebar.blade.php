@@ -50,12 +50,6 @@
                         </a>
                     </li>
                     @endcan
-                    <li class="nav-item">
-                        <a class="nav-link" href="register.html">
-                            <i class="ni ni-circle-08 text-pink"></i>
-                            <span class="nav-link-text">{{__('Log out')}}</span>
-                        </a>
-                    </li>
                 </ul>
                 <!-- Divider -->
                 <hr class="my-3">

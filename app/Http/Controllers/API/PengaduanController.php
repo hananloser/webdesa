@@ -4,8 +4,9 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Pengaduan;
+use Bot;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+use PHPTelebot;
 
 class PengaduanController extends Controller
 {
@@ -26,9 +27,18 @@ class PengaduanController extends Controller
     public function index()
     {
 
-        return response()->json([
-            'status' => 'oke',
-        ]);
+        $bot = new PHPTelebot(env('TELEGRAM_KEY' , '@bangunjaya_bot' ));
+
+        $bot->cmd('/echo | /say' , function($pesan){
+
+            if($pesan == '') {
+                $pesan = 'Gunakan Perintah : /echo ["text"] /say ["text"]';
+            }
+            return Bot::sendMessage($pesan);
+        });
+
+
+
 
     }
 
@@ -47,20 +57,20 @@ class PengaduanController extends Controller
         ]);
 
         try {
-            $this->kirimPesan($request->pengaduan, $request->nohp);
-            Pengaduan::create([
-                'no_pengaduan' => Str::uuid(5),
-                'nama' => $request->nama,
-                'nohp' => $request->nohp,
-                'pengaduan' => $request->pengaduan,
-            ]);
+            // Pengaduan::create([
+            //     'no_pengaduan' => Str::uuid(5),
+            //     'nama' => $request->nama,
+            //     'nohp' => $request->nohp,
+            //     'pengaduan' => $request->pengaduan,
+            // ]);
 
+            return $this->kirimPesan($request->pengaduan, $request->nohp);
 
         } catch (\Throwable $th) {
             //throw $th;
             return response()->json([
-                'status' => 'error' ,
-                'error'  => $th
+                'status' => 'error',
+                'error' => $th,
             ]);
         }
 
@@ -103,9 +113,7 @@ class PengaduanController extends Controller
     private function getTelegram($url, $params)
     {
         $ch = curl_init();
-
         curl_setopt($ch, CURLOPT_URL, $url . $params);
-
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_TIMEOUT, 3);
         $content = curl_exec($ch);
@@ -113,16 +121,19 @@ class PengaduanController extends Controller
         return json_decode($content, true);
 
     }
-    private function kirimPesan( $pengaduan, $nohp)
+    private function kirimPesan($pengaduan, $nohp)
     {
-
         $key = env('TELEGRAM_KEY', null);
         $chat = $this->getTelegram('https://api.telegram.org/' . $key . '/getUpdates', '');
         if ($chat['ok']) {
             $chat_id = $chat['result'][0]['message']['chat']['id'];
-            $pesan = 'Hai Admin Desa Bangun Jaya | Ingin Mengadukan ' . $pengaduan . 'Segera Di Cek | NO:HP' . $nohp;
-            return $this->getTelegram('https://api.telegram.org/' . $key . '/sendMessage', '?chat_id=' . $chat_id . '&text=' . $pesan);
+            // $pesan = 'Hai Admin Desa Bangun Jaya | Ingin Mengadukan ' . $pengaduan . 'Segera Di Cek | NO:HP' . $nohp;
+
+            // $pesan = "Ada Data Baru Silakan Cek" ;
+            // return $this->getTelegram('https://api.telegram.org/' . $key . '/sendMessage', '?chat_id=' . $chat_id . '&text=' . $pesan . '&parse_mode=' . 'Markdown');
         }
     }
+
+
 
 }
