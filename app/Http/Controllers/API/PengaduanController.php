@@ -4,9 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Pengaduan;
-use Bot;
 use Illuminate\Http\Request;
-use PHPTelebot;
 
 class PengaduanController extends Controller
 {
@@ -27,18 +25,19 @@ class PengaduanController extends Controller
     public function index()
     {
 
-        $bot = new PHPTelebot(env('TELEGRAM_KEY' , '@bangunjaya_bot' ));
+        $entityBody = file_get_contents('php://input');
+        $pesanditerima = json_decode($entityBody, true);
 
-        $bot->cmd('/echo | /say' , function($pesan){
+        echo json_encode($pesanditerima);
 
-            if($pesan == '') {
-                $pesan = 'Gunakan Perintah : /echo ["text"] /say ["text"]';
-            }
-            return Bot::sendMessage($pesan);
-        });
+        // $bot = new PHPTelebot(env('TELEGRAM_KEY' , '@bangunjaya_bot' ));
 
+        // $bot->cmd('/echo | /say' , function($pesan){
 
-
+        //     if($pesan == '') {
+        //         $pesan = 'Gunakan Perintah : /echo ["text"] /say ["text"]';
+        //     }
+        // });
 
     }
 
@@ -133,7 +132,5 @@ class PengaduanController extends Controller
             // return $this->getTelegram('https://api.telegram.org/' . $key . '/sendMessage', '?chat_id=' . $chat_id . '&text=' . $pesan . '&parse_mode=' . 'Markdown');
         }
     }
-
-
 
 }
