@@ -47,6 +47,7 @@ class PengaduanController extends Controller
         ]);
 
         try {
+            $this->kirimPesan($request->pengaduan, $request->nohp);
             Pengaduan::create([
                 'no_pengaduan' => Str::uuid(5),
                 'nama' => $request->nama,
@@ -54,8 +55,6 @@ class PengaduanController extends Controller
                 'pengaduan' => $request->pengaduan,
             ]);
 
-            $aduan = Pengaduan::latest()->first();
-            $this->kirimPesan($aduan->pengaduan, $aduan->nohp);
 
         } catch (\Throwable $th) {
             //throw $th;
