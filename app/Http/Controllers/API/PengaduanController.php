@@ -46,15 +46,24 @@ class PengaduanController extends Controller
             'pengaduan' => 'required',
         ]);
 
-        Pengaduan::create([
-            'no_pengaduan' => Str::uuid(5),
-            'nama' => $request->nama,
-            'nohp' => $request->nohp,
-            'pengaduan' => $request->pengaduan,
-        ]);
+        try {
+            Pengaduan::create([
+                'no_pengaduan' => Str::uuid(5),
+                'nama' => $request->nama,
+                'nohp' => $request->nohp,
+                'pengaduan' => $request->pengaduan,
+            ]);
 
-        $aduan = Pengaduan::latest()->first();
-        return $this->kirimPesan($aduan->no_pengaduan, $aduan->pengaduan, $aduan->nohp);
+            $aduan = Pengaduan::latest()->first();
+            return $this->kirimPesan($aduan->no_pengaduan, $aduan->pengaduan, $aduan->nohp);
+
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json([
+                'status' => 'error' ,
+                'error'  => $th
+            ]);
+        }
 
     }
 
@@ -109,7 +118,6 @@ class PengaduanController extends Controller
     {
 
         $key = env('TELEGRAM_KEY', null);
-
         $chat = $this->getTelegram('https://api.telegram.org/' . $key . '/getUpdates', '');
 
         if ($chat['ok']) {
