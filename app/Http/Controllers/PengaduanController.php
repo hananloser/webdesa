@@ -58,6 +58,9 @@ class PengaduanController extends Controller
             'pengaduan' => $request->pengaduan,
             'nohp' => $request->nohp,
         ]);
+
+        $this->kirimPesan($request->pengaduan , $request->nohp);
+
         DB::commit();
         return redirect()->route('pengaduan.index')->with('status', 'Pengaduan Berhasil Di Tambah Kan');
     }
@@ -93,10 +96,32 @@ class PengaduanController extends Controller
      */
     public function destroy($id)
     {
-
         Pengaduan::find($id)->delete($id);
         return response()->json([
             'success' => 'Record deleted successfully!',
         ]);
     }
+
+    private function getTelegram($url, $params)
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url . $params);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 3);
+        $content = curl_exec($ch);
+        curl_close($ch);
+        return json_decode($content, true);
+
+    }
+    private function kirimPesan($pengaduan, $nohp)
+    {
+        $key = env('TELEGRAM_KEY', null);
+        $chat = $this->getTelegram('https://api.telegram.org/' . $key . '/getUpdates', '');
+        if ($chat['ok']) {
+            $chat_id = $chat['result'][1]['message']['chat']['id'];
+            $pesan = 'Hai Admin Desa Bangun Jaya | Ingin Mengadukan ' . $pengaduan . 'Segera Di Cek | NO:HP' . $nohp;
+            return $this->getTelegram('https://api.telegram.org/' . $key . '/sendMessage', '?chat_id=' . $chat_id . '&text=' . $pesan);
+        }
+    }
+
 }

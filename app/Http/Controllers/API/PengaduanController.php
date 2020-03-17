@@ -118,7 +118,6 @@ class PengaduanController extends Controller
 
         $key = env('TELEGRAM_KEY', null);
         $chat = $this->getTelegram('https://api.telegram.org/' . $key . '/getUpdates', '');
-
         if ($chat['ok']) {
             $chat_id = $chat['result'][0]['message']['chat']['id'];
             $pesan = 'Hai Admin Desa Bangun Jaya | Ingin Mengadukan ' . $pengaduan . 'Segera Di Cek | NO:HP' . $nohp;
