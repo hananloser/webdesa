@@ -41,7 +41,7 @@ return [
     'bots' => [
         'common' => [
             'username' => 'bangunjaya_bot',
-            'token' => env('TELEGRAM_KEY', ''),
+            'token' => env('TELEGRAM_KEY', '974298419:AAHlN53GnBjj9pIbsfOX8a9_fSoaaEwC3AI'),
             'commands' => [
                 // Telegram\Bot\Commands\HelpCommand::class,
             ],

@@ -8,7 +8,7 @@ use Telegram\Bot\Laravel\Facades\Telegram;
 class TelegramController extends Controller
 {
 
-    public function testApi()
+    public function getId()
     {
         $tele = Telegram::getUpdates();
         $chat_id = array();
@@ -19,7 +19,7 @@ class TelegramController extends Controller
         return array_unique($chat_id);
     }
 
-    public function kirimPesan()
+    public function kirim()
     {
         foreach ($this->testApi() as $value) {
             $response = Telegram::sendMessage([
@@ -27,7 +27,6 @@ class TelegramController extends Controller
                 'text' => 'Test Satu kali Lagi',
             ]);
         }
-
         return response()->json([
             'status' => 'Pesan Telah Di Kirim',
         ]);

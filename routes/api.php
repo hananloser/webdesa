@@ -23,9 +23,8 @@ Route::resource('mobile/layanan', 'API\LayananController')->only('index', 'show'
 Route::resource('aparat', 'API\AparatdesaController')->only('index', 'show');
 Route::resource('berita', 'API\BeritaContorller')->only('index');
 Route::resource('pengaduan', 'API\PengaduanController');
-Route::get('telegram' , 'API\TelegramController@testApi');
-Route::get('kirim' , 'API\TelegramController@kirimPesan');
-Route::get('perintah' , 'API\TelegramController@perintah');
-Route::post('300797/webhook' , 'API\TelegramController@webhook');
+Route::get('/kirim' , 'API\TelegramController@getId')->name('bot.getId');
+
+
 
 
