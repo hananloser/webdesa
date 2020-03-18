@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use Telegram\Bot\Api;
 use Telegram\Bot\Laravel\Facades\Telegram;
 
 class TelegramController extends Controller
@@ -29,17 +30,28 @@ class TelegramController extends Controller
         }
 
         return response()->json([
-            'status' => 'Pesan Telah Di Kirim' ,
+            'status' => 'Pesan Telah Di Kirim',
         ]);
     }
 
+    public function perintah()
+    {
+        $res = new Api(env('TELEGRAM_KEY'));
+    }
 
-    public function perintah(){
+    public function webhook(){
 
-        $res = Telegram::getCommand() ;
 
+
+    }
+
+    public function settingWebHook() {
+
+        $res = new Api(env('TELEGRAM_KEY'));
+        $res->setWebhook([
+            'url' => 'https://lak-hamindonesianews.com/api/webhook'
+        ]);
         return $res ;
-
     }
 
 }

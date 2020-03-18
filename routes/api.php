@@ -25,11 +25,10 @@ Route::resource('berita', 'API\BeritaContorller')->only('index');
 Route::resource('pengaduan', 'API\PengaduanController');
 Route::get('/telegram' , 'API\TelegramController@testApi');
 Route::get('/kirim' , 'API\TelegramController@kirimPesan');
-
-
+Route::get('/perintah' , 'API\TelegramController@perintah');
+Route::get('/set' , 'API\TelegramController@settingWebHook');
 Route::post('/{token}/webhook', function () {
     $updates = Telegram::getWebhookUpdates();
-
     return $updates ;
 });
 
