@@ -34,14 +34,10 @@ class TelegramController extends Controller
         ]);
     }
 
-    public function perintah()
-    {
-        $res = new Api(env('TELEGRAM_KEY'));
-    }
 
     public function webhook(){
         $updates = Telegram::getWebhookUpdates();
-        return $updates ;
+        return 'oke';
     }
 
 

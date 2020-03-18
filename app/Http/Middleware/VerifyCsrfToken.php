@@ -15,6 +15,6 @@ class VerifyCsrfToken extends Middleware
 
     protected $except = [
         //
-        '/<token>/webhook'
+        '/300797/webhook'
     ];
 }
