@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use Telegram\Bot\Api;
-use Telegram\Bot\Exceptions\TelegramSDKException;
 use Telegram\Bot\Laravel\Facades\Telegram;
 
 class TelegramController extends Controller
@@ -39,7 +37,6 @@ class TelegramController extends Controller
     public function webhook(){
         $updates = Telegram::getWebhookUpdates();
         Telegram::commandsHandler(true);
-
     }
 
 

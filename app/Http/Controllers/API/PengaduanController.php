@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Pengaduan;
 use Illuminate\Http\Request;
 use Telegram\Bot\Laravel\Facades\Telegram;
+use Illuminate\Support\Str ;
+use App\Pengaduan ;
 
 class PengaduanController extends Controller
 {
@@ -30,7 +31,7 @@ class PengaduanController extends Controller
         return response()->json([
             'id' => $bot->getId(),
             'firstName' => $bot->getFirstName(),
-            'username'  => $bot->getUsername(),
+            'username' => $bot->getUsername(),
         ]);
 
     }
@@ -49,24 +50,13 @@ class PengaduanController extends Controller
             'pengaduan' => 'required',
         ]);
 
-        try {
-            // Pengaduan::create([
-            //     'no_pengaduan' => Str::uuid(5),
-            //     'nama' => $request->nama,
-            //     'nohp' => $request->nohp,
-            //     'pengaduan' => $request->pengaduan,
-            // ]);
-
-            return $this->kirimPesan($request->pengaduan, $request->nohp);
-
-        } catch (\Throwable $th) {
-            //throw $th;
-            return response()->json([
-                'status' => 'error',
-                'error' => $th,
-            ]);
-        }
-
+        Pengaduan::create([
+            'no_pengaduan' => Str::uuid(5),
+            'nama' => $request->nama,
+            'nohp' => $request->nohp,
+            'pengaduan' => $request->pengaduan,
+        ]);
+        $this->kirimPesan($request->nama , $request->pengaduan , $request->nohp);
     }
 
     /**
@@ -103,28 +93,27 @@ class PengaduanController extends Controller
         //
     }
 
-    private function getTelegram($url, $params)
+    private function getId()
     {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url . $params);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 3);
-        $content = curl_exec($ch);
-        curl_close($ch);
-        return json_decode($content, true);
+        $tele = Telegram::getUpdates();
+        $chat_id = array();
+        foreach ($tele as $item) {
+            $newitem = $item['message']['chat']['id'];
+            array_push($chat_id, $newitem);
+        }
+        return array_unique($chat_id);
 
     }
-    private function kirimPesan($pengaduan, $nohp)
-    {
-        $key = env('TELEGRAM_KEY', null);
-        $chat = $this->getTelegram('https://api.telegram.org/' . $key . '/getUpdates', '');
-        if ($chat['ok']) {
-            $chat_id = $chat['result'][0]['message']['chat']['id'];
-            // $pesan = 'Hai Admin Desa Bangun Jaya | Ingin Mengadukan ' . $pengaduan . 'Segera Di Cek | NO:HP' . $nohp;
 
-            // $pesan = "Ada Data Baru Silakan Cek" ;
-            // return $this->getTelegram('https://api.telegram.org/' . $key . '/sendMessage', '?chat_id=' . $chat_id . '&text=' . $pesan . '&parse_mode=' . 'Markdown');
+    private function kirimPesan($nama, $pengaduan, $no_hp)
+    {
+        foreach ($this->getId() as $key => $value) {
+            Telegram::sendMessage([
+                'chat_id' => $value,
+                'text' => 'Hai Admin Nama :' . $nama . ' Ingin Mengadukan : ' . $pengaduan . ' Contact :  ' . $no_hp,
+            ]);
         }
+
     }
 
 }
