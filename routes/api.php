@@ -26,6 +26,6 @@ Route::resource('pengaduan', 'API\PengaduanController');
 Route::get('/telegram' , 'API\TelegramController@testApi');
 Route::get('/kirim' , 'API\TelegramController@kirimPesan');
 Route::get('/perintah' , 'API\TelegramController@perintah');
-Route::post('974298419:AAHlN53GnBjj9pIbsfOX8a9_fSoaaEwC3AI/webhook' , 'API\TelegramController@webhook');
+Route::get('974298419:AAHlN53GnBjj9pIbsfOX8a9_fSoaaEwC3AI/webhook' , 'API\TelegramController@webhook');
 
 
