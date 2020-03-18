@@ -37,7 +37,9 @@ class TelegramController extends Controller
 
     public function webhook(){
         $updates = Telegram::getWebhookUpdates();
-        return 'oke';
+
+        return $updates ;
+
     }
 
 
