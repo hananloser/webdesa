@@ -44,6 +44,7 @@ return [
             'token' => env('TELEGRAM_KEY', ''),
             'commands' => [
                 Telegram\Bot\Commands\HelpCommand::class,
+
             ],
         ],
 
