@@ -40,18 +40,10 @@ class TelegramController extends Controller
     }
 
     public function webhook(){
-
-
-
+        $updates = Telegram::getWebhookUpdates();
+        return $updates ;
     }
 
-    public function settingWebHook() {
 
-        $res = new Api(env('TELEGRAM_KEY'));
-        $res->setWebhook([
-            'url' => 'https://lak-hamindonesianews.com/api/webhook'
-        ]);
-        return $res ;
-    }
 
 }
