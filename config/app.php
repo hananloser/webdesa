@@ -167,6 +167,9 @@ return [
          * Package Service Providers...
          */
         'Barryvdh\Debugbar\ServiceProvider',
+        Telegram\Bot\Laravel\TelegramServiceProvider::class,
+
+
         /*
          * Application Service Providers...
          */
@@ -228,6 +231,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Debugbar' => 'Barryvdh\Debugbar\Facade',
+        'Telegram' => Telegram\Bot\Laravel\Facades\Telegram::class,
 
     ],
 

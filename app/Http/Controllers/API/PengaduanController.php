@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Pengaduan;
 use Illuminate\Http\Request;
+use Telegram\Bot\Laravel\Facades\Telegram;
 
 class PengaduanController extends Controller
 {
@@ -25,19 +26,12 @@ class PengaduanController extends Controller
     public function index()
     {
 
-        $entityBody = file_get_contents('php://input');
-        $pesanditerima = json_decode($entityBody, true);
-
-        echo json_encode($pesanditerima);
-
-        // $bot = new PHPTelebot(env('TELEGRAM_KEY' , '@bangunjaya_bot' ));
-
-        // $bot->cmd('/echo | /say' , function($pesan){
-
-        //     if($pesan == '') {
-        //         $pesan = 'Gunakan Perintah : /echo ["text"] /say ["text"]';
-        //     }
-        // });
+        $bot = Telegram::getMe();
+        return response()->json([
+            'id' => $bot->getId(),
+            'firstName' => $bot->getFirstName(),
+            'username'  => $bot->getUsername(),
+        ]);
 
     }
 

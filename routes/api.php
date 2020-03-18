@@ -23,3 +23,13 @@ Route::resource('mobile/layanan', 'API\LayananController')->only('index', 'show'
 Route::resource('aparat', 'API\AparatdesaController')->only('index', 'show');
 Route::resource('berita', 'API\BeritaContorller')->only('index');
 Route::resource('pengaduan', 'API\PengaduanController');
+Route::get('/telegram' , 'API\TelegramController@testApi');
+Route::get('/kirim' , 'API\TelegramController@kirimPesan');
+
+
+Route::post('/{token}/webhook', function () {
+    $updates = Telegram::getWebhookUpdates();
+
+    return $updates ;
+});
+
