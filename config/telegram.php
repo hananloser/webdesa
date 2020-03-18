@@ -42,7 +42,6 @@ return [
         'common' => [
             'username'  => 'bangunjaya_bot',
             'token' => env('TELEGRAM_KEY', ''),
-            'webhook_url' => env('TELEGRAM_WEB_HOOK'),
             'commands' => [
 //                Acme\Project\Commands\MyTelegramBot\BotCommand::class
                 // App\Console\Commands\StartCommand::class,
