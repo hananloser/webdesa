@@ -39,13 +39,6 @@ class TelegramController extends Controller
     public function webhook(){
         $updates = Telegram::getWebhookUpdates();
         Telegram::commandsHandler(true);
-        try {
-            $bot = new Api(env('TELEGRAM_KEY'));
-            return $bot->getLastResponse();
-
-        }catch(TelegramSDKException $th) {
-            return $th ;
-        }
 
     }
 
