@@ -102,7 +102,6 @@ class PengaduanController extends Controller
             array_push($chat_id, $newitem);
         }
         return array_unique($chat_id);
-
     }
 
     private function kirimPesan($nama, $pengaduan, $no_hp)
