@@ -1,12 +1,14 @@
 @extends('layouts.landing')
 @section('content')
 <div class="wrapper bg-dark">
-    <div class="container">
+    <div class="container-fluid">
         <br>
         <div class="row justify-content-center ">
-            <div class="col-lg-2 col-md-3 col-sm-2 col-2">
-                <img src="{{asset('assets/img/logo.png')}}" height="150">
-            </div>
+            <center>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <img src="{{asset('assets/img/logo.png')}}" height="150">
+                </div>
+            </center>
         </div>
         <div class="row justify-content-center ">
             <blockquote class="blockquote text-center">
@@ -62,6 +64,5 @@
             </div>
         </div>
     </div>
-
 </div>
 @endsection
