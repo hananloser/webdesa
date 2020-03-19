@@ -11,12 +11,18 @@ class TelegramController extends Controller
 
     public function getId(){
         $res = Telegram::getUpdates();
-        foreach ($res as $item) {
-
-        }
-
+        return $res ;
     }
 
+    public function kirim(){
+
+        $chat_id = $this->getId();
+        $container = array();
+        foreach ($chat_id as $key => $item) {
+            $container[] = $item ;
+        }
+        return $container ;
+    }
 
 
 
